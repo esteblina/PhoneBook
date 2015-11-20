@@ -1,8 +1,11 @@
 package net.ukr.steblina.models;
 
 import javax.persistence.*;
+import javax.validation.ValidationException;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+
+import net.ukr.steblina.check.Validation;
 
 @Entity
 @Table(name = "phones")
@@ -50,15 +53,15 @@ public class Phone {
 	}
 
 	public Phone(Phone phone) {
-		this.id = phone.id;
-		this.user_id =  phone.user_id;
-		this.lastname =  phone.lastname;
-		this.firstname =  phone.firstname;
-		this.patronymic =  phone.patronymic;
-		this.mobilephone =  phone.mobilephone;
-		this.homephone =  phone.homephone;
-		this.address =  phone.address;
-		this.email =  phone.email;
+		this.id = phone.getId();
+		this.user_id =  phone.getUser_id();
+		this.lastname =  phone.getLastname();
+		this.firstname =  phone.getFirstname();
+		this.patronymic =  phone.getPatronymic();
+		this.mobilephone =  phone.getMobilephone();
+		this.homephone =  phone.getHomephone();
+		this.address =  phone.getAddress();
+		this.email =  phone.getEmail();
 	}
 
 	public Integer getId() {
@@ -81,7 +84,9 @@ public class Phone {
 		return lastname;
 	}
 
-	public void setLastname(String lastname) {
+	public void setLastname(String lastname) throws ValidationException {
+		if(lastname.length()<4)
+			throw new ValidationException("Min Last Name lenght 4");
 		this.lastname = lastname;
 	}
 
@@ -90,6 +95,8 @@ public class Phone {
 	}
 
 	public void setFirstname(String firstname) {
+		if(firstname.length()<4)
+			throw new ValidationException("Min First Name lenght 4");
 		this.firstname = firstname;
 	}
 
@@ -98,6 +105,8 @@ public class Phone {
 	}
 
 	public void setPatronymic(String patronymic) {
+		if(patronymic.length()<4)
+			throw new ValidationException("Min Patronymic lenght 4");
 		this.patronymic = patronymic;
 	}
 
@@ -106,6 +115,8 @@ public class Phone {
 	}
 
 	public void setMobilephone(String mobilephone) {
+		if(!Validation.phoneValid(mobilephone))
+			throw new ValidationException("Mobilephone invalid");
 		this.mobilephone = mobilephone;
 	}
 
@@ -114,6 +125,8 @@ public class Phone {
 	}
 
 	public void setHomephone(String homephone) {
+		if(!Validation.phoneValid(homephone))
+			throw new ValidationException("Homephone invalid");
 		this.homephone = homephone;
 	}
 
@@ -130,13 +143,16 @@ public class Phone {
 	}
 
 	public void setEmail(String email) {
+		if(!Validation.emailValid(email))
+			throw new ValidationException("Email invalid");
 		this.email = email;
 	}
 
 	@Override
 	public String toString() {
-		return firstname + "   " + lastname + "    " + patronymic + "     " + mobilephone + "      " + homephone
-				+ "    " + address + "    " + email;
+		return "Phone [id=" + id + ", user_id=" + user_id + ", lastname=" + lastname + ", firstname=" + firstname
+				+ ", patronymic=" + patronymic + ", mobilephone=" + mobilephone + ", homephone=" + homephone
+				+ ", address=" + address + ", email=" + email + "]";
 	}
-
+	
 }

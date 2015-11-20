@@ -73,10 +73,51 @@ public class User{
 
 	public User() {
 	}
+	
+	
+
+	public User(User user) {
+		super();
+		this.id = user.getId();
+		this.login = user.getLogin();
+		this.password = user.getPassword();
+		this.fullname = user.getFullname();
+	}
 
 	@Override
-	public String toString(){
-		return id+"    "+login+"    "+password+"      "+fullname;
+	public String toString() {
+		return "User [id=" + id + ", login=" + login + ", password=" + password + ", fullname=" + fullname + "]";
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result + ((login == null) ? 0 : login.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		User other = (User) obj;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
+		if (login == null) {
+			if (other.login != null)
+				return false;
+		} else if (!login.equals(other.login))
+			return false;
+		return true;
 	}
 	
 }

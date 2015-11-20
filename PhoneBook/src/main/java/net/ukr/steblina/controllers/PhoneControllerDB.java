@@ -32,7 +32,7 @@ public class PhoneControllerDB {
 		try {
 			User user = userDAO.getByLogin(login);
 			Phone phone = new Phone();
-
+			System.out.print(mobilephone);
 			phone.setUser_id(user.getId());
 			phone.setFirstname(firstname);
 			phone.setLastname(lastname);

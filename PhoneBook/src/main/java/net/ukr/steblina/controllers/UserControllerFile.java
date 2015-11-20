@@ -1,6 +1,7 @@
 package net.ukr.steblina.controllers;
 
 import java.io.File;
+import java.util.List;
 
 import javax.validation.ValidationException;
 
@@ -40,16 +41,15 @@ public class UserControllerFile {
 		} catch (Exception ex) {
 			return ex.getMessage();
 		}
-		System.out.println(8);
 		return "User succesfully saved!";
 	}
-/*
+
 	@RequestMapping(value = "/find")
 	@ResponseBody
 	public String getById(String id) {
 		String login;
 		try {
-			User user = userDAO.getById(Integer.parseInt(id));
+			User user = userPhonesDAO.getById(Integer.parseInt(id),file);
 			login = user.getLogin();
 		} catch (Exception ex) {
 			return "User not found";
@@ -62,7 +62,7 @@ public class UserControllerFile {
 	public String getUsers() {
 		String userList = "";
 		try {
-			List<User> users = userDAO.getAll();
+			List<User> users = userPhonesDAO.getAllUsers(file);
 			for (User user : users)
 				userList += user;
 		} catch (Exception ex) {
@@ -70,5 +70,5 @@ public class UserControllerFile {
 		}
 		return userList;
 	}
-*/
+
 }

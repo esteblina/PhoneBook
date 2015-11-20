@@ -1,5 +1,6 @@
 package net.ukr.steblina.models;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class UserPhones {
@@ -22,6 +23,8 @@ public class UserPhones {
 	}
 	
 	public void addPhone(Phone phone){
+		if(phones==null)
+			phones =new ArrayList<Phone>();
 		phones.add(phone);
 	}
 	
@@ -37,6 +40,10 @@ public class UserPhones {
 				break;
 			}
 		}
+	}
+	@Override
+	public String toString() {
+		return "UserPhones [user=" + user + ", phones=" + phones + "]";
 	}
 
 }

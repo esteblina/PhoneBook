@@ -2,7 +2,6 @@ package net.ukr.steblina.controllers;
 
 
 import java.io.File;
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Profile;
@@ -11,9 +10,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import net.ukr.steblina.models.Phone;
-import net.ukr.steblina.models.PhoneDAO;
 import net.ukr.steblina.models.User;
-import net.ukr.steblina.models.UserDAO;
+import net.ukr.steblina.models.UserPhones;
+import net.ukr.steblina.models.UserPhonesDAO;
+import net.ukr.steblina.models.UserPhonesDAOImpl;
 
 @Controller
 @Profile("file")
@@ -22,13 +22,15 @@ public class PhoneControllerFile {
 	@Autowired
 	private File file;
 
-/*	@RequestMapping(value = "/save")
+	private UserPhonesDAO userPhonesDAO = new UserPhonesDAOImpl();
+	
+	@RequestMapping(value = "/save")
 	@ResponseBody
 	public String create(String login, String lastname, String firstname,
 						 String patronymic, String mobilephone, String homephone,
 						 String address, String email) {
 		try {
-			User user = userDAO.getByLogin(login);
+			User user = userPhonesDAO.getByLogin(login,file);
 			Phone phone = new Phone();
 
 			phone.setUser_id(user.getId());
@@ -39,14 +41,18 @@ public class PhoneControllerFile {
 			phone.setHomephone(homephone);
 			phone.setAddress(address);
 			phone.setEmail(email);
-			
-			phoneDAO.save(phone);
+
+			UserPhones userPhone = userPhonesDAO.getByUser(user,file);
+			userPhone.addPhone(phone);
+
+			userPhonesDAO.save(userPhone, file);
+
 		} catch (Exception ex) {
 			return ex.getMessage();
 		}
 		return "Phone succesfully saved!";
 	}
-
+/*
 	@RequestMapping(value = "/delete")
 	@ResponseBody
 	public String deleteById(String id) {
