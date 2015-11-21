@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head lang="en">
+<meta charset="UTF-8" />
+<title>Registration</title>
+</head>
+<body>
+	<form id="new-user" role="form" th:action="@{user/save}" method="post"
+		th:object="${user}">
+		<fieldset>
+			<legend>Please enter</legend>
+			<div th:if="${param.error}" class="alert alert-error">Invalid
+				username and password.</div>
+			<div th:if="${param.logout}" class="alert alert-success">You
+				have been logged out.</div>
+			<div>
+				<label for="field1">Login:</label> <input type="text" id="field1"
+					name="field1" th:field="${user.login}" />
+			</div>
+			<div>
+				<label for="field2">Password:</label> <input type="password"
+					id="field2" name="field2" th:field="${user.password}" />
+			</div>
+			<div>
+				<label for="field2">Re-Password:</label> <input type="password" />
+			</div>
+			<div>
+				<label for="field3">Full Name</label> <input type="text" id="field3"
+					name="field3" th:field="${user.fullname}" />
+			</div>
+			<div>
+				<button type="submit">Registration</button>
+			</div>
+		</fieldset>
+	</form>
+</body>
+</html>

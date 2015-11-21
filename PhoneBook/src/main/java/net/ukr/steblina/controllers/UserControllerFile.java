@@ -8,6 +8,7 @@ import javax.validation.ValidationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -23,10 +24,10 @@ public class UserControllerFile {
 
 	@Autowired
 	private File file;
-	
-	private UserPhonesDAO userPhonesDAO = new UserPhonesDAOImpl();
+	@Autowired
+	private UserPhonesDAO userPhonesDAO;// = new UserPhonesDAOImpl();
 
-	@RequestMapping(value = "/save")
+/*	@RequestMapping(value = "/save")
 	@ResponseBody
 	public String create(String login, String pass, String fullname) {
 		try {
@@ -42,6 +43,17 @@ public class UserControllerFile {
 			return ex.getMessage();
 		}
 		return "User succesfully saved!";
+	}*/
+	@RequestMapping(value = "/save")
+	public String create(User user, Model model) {
+		try {
+			userPhonesDAO.save(user,file);
+		} catch (ValidationException invalid) {
+			model.addAttribute("error");//invalid.getMessage();
+		} catch (Exception ex) {
+			model.addAttribute("error");//ex.getMessage();
+		}
+		return "redirect:/login";
 	}
 
 	@RequestMapping(value = "/find")

@@ -21,8 +21,8 @@ import net.ukr.steblina.models.UserPhonesDAOImpl;
 public class PhoneControllerFile {
 	@Autowired
 	private File file;
-
-	private UserPhonesDAO userPhonesDAO = new UserPhonesDAOImpl();
+	@Autowired
+	private UserPhonesDAO userPhonesDAO;// = new UserPhonesDAOImpl();
 	
 	@RequestMapping(value = "/save")
 	@ResponseBody

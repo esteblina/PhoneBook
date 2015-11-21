@@ -7,6 +7,7 @@ import javax.validation.ValidationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -24,7 +25,7 @@ public class UserControllerDB {
 	@Autowired
 	private UserDAO userDAO;
 
-	@RequestMapping(value = "/save")
+/*	@RequestMapping(value = "/save")
 	@ResponseBody
 	public String create(String login, String pass, String fullname) {
 		try {
@@ -41,6 +42,17 @@ public class UserControllerDB {
 			return ex.getMessage();
 		}
 		return "User succesfully saved!";
+	}*/
+	@RequestMapping(value = "/save")
+	public String create(User user, Model model) {
+		try {
+			userDAO.save(user);
+		} catch (ValidationException invalid) {
+			model.addAttribute("error");//invalid.getMessage();
+		} catch (Exception ex) {
+			model.addAttribute("error");//ex.getMessage();
+		}
+		return "redirect:/login";
 	}
 
 	@RequestMapping(value = "/find")

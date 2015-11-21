@@ -1,0 +1,35 @@
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:tiles="http://www.thymeleaf.org">
+<head>
+<title tiles:fragment="title">Log in</title>
+<script src="webjars/jquery/2.1.4/jquery.min.js" type="text/javascript"></script>
+<link href="webjars/bootstrap/3.3.5/css/bootstrap.min.css"
+	rel="stylesheet" media="screen" />
+<link href="css/singin.css" rel="stylesheet" media="screen" />
+</head>
+<body>
+	<div class="container">
+		<div class="card card-container">
+			<form class="form-signin" name="login" th:action="@{/login}"
+				method="post">
+				<legend class="form-signin-heading">Please Login</legend>
+
+				<label for="username" class="sr-only">Username</label> <input
+					type="text" id="username" name="username" class="form-control" />
+				<label for="password" class="sr-only">Password</label> <input
+					type="password" id="password" name="password" class="form-control" />
+				<div th:if="${param.error}" class="alert alert-error">Invalid
+					username and password.</div>
+				<div th:if="${param.logout}" class="alert alert-success">You
+					have been logged out.</div>
+				<button type="submit" class="btn btn-lg btn-primary btn-block">Log
+					in</button>
+				<a href="/registration" class="btn btn-lg btn-primary btn-block">Registration</a>
+
+
+			</form>
+		</div>
+	</div>
+
+</body>
+</html>

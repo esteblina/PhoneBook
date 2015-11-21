@@ -13,6 +13,7 @@ import java.util.List;
 import javax.validation.ValidationException;
 
 import org.springframework.context.annotation.Profile;
+import org.springframework.stereotype.Repository;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -20,6 +21,7 @@ import com.google.gson.reflect.TypeToken;
 import com.google.gson.stream.JsonReader;
 
 @Profile("file")
+@Repository
 public class UserPhonesDAOImpl implements UserPhonesDAO {
 
 	@Override
