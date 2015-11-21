@@ -1,5 +1,6 @@
 package net.ukr.steblina.models;
 
+
 import javax.persistence.*;
 import javax.validation.ValidationException;
 import javax.validation.constraints.NotNull;
@@ -77,7 +78,6 @@ public class User{
 	
 
 	public User(User user) {
-		super();
 		this.id = user.getId();
 		this.login = user.getLogin();
 		this.password = user.getPassword();

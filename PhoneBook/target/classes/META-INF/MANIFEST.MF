@@ -1,9 +1,9 @@
 Manifest-Version: 1.0
 Implementation-Title: PhoneBook
 Implementation-Version: 0.0.1-SNAPSHOT
-Built-By: Admin
+Built-By: Hellish
 Implementation-Vendor-Id: net.ukr.steblina
-Build-Jdk: 1.8.0_65
+Build-Jdk: 1.8.0_51
 Created-By: Maven Integration for Eclipse
 Implementation-Vendor: Pivotal Software, Inc.
 

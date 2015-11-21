@@ -17,8 +17,4 @@ public interface UserPhonesDAO {
 
 	public UserPhones getByUser(User user, File file) throws Exception;
 
-
-
-	
-
 }

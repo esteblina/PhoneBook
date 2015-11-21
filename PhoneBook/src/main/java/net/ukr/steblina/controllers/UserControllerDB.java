@@ -19,6 +19,8 @@ import net.ukr.steblina.models.UserDAO;
 @RequestMapping(value = "/user")
 public class UserControllerDB {
 
+	
+
 	@Autowired
 	private UserDAO userDAO;
 

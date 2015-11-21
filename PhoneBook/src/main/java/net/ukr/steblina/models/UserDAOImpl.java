@@ -12,10 +12,11 @@ import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+
 @Repository
 @Transactional
 @Profile("db")
-public class UserDAOImpl implements UserDAO {
+public class UserDAOImpl implements UserDAO{
 
 	@Autowired
 	private SessionFactory _sessionFactory;
@@ -58,4 +59,5 @@ public class UserDAOImpl implements UserDAO {
 			throw new SQLWarning("No user");
 		return user;
 	}
+	
 }
