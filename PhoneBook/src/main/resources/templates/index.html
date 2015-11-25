@@ -1,0 +1,135 @@
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:tiles="http://www.thymeleaf.org">
+<head>
+<title tiles:fragment="title">Phones book</title>
+<script src="/webjars/jquery/2.1.4/jquery.min.js" type="text/javascript"></script>
+<script src="/webjars/bootstrap/3.3.5/js/bootstrap.min.js" type="text/javascript"></script>
+<link href="/webjars/bootstrap/3.3.5/css/bootstrap.min.css"
+	rel="stylesheet" media="screen" />
+<link href="/css/phones.css" rel="stylesheet" media="screen" />
+</head>
+<body>
+<div class="container">
+<h2>Phones book</h2>
+</div>
+	<div class="container">
+		<table class="table table-bordered">
+	<tr>
+		<th>lastname</th>
+		<th>firstname</th>
+		<th>patronymic</th>
+		<th>mobilephone</th>
+		<th>homephone</th>
+		<th>address</th>
+		<th>email</th>
+		<th>action</th>
+	</tr>	
+			<tr th:each="phone : ${phones}">
+
+				<td th:text="${phone.lastname}">lastname</td>
+				<td th:text="${phone.firstname}">firstname</td>
+				<td th:text="${phone.patronymic}">patronymic</td>
+				<td th:text="${phone.mobilephone}">mobilephone</td>
+				<td th:text="${phone.homephone}">homephone</td>
+				<td th:text="${phone.address}">address</td>
+				<td th:text="${phone.email}">email</td>
+				<td><button th:id="${phone.id}" type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Edit</button>
+				<a th:href="${'/phone/delete/' + phone.id}">Delete</a></td>
+			</tr>
+		</table>
+	</div>
+	
+	<!-- Modal -->
+<div id="myModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Phone edit</h4>
+      </div>
+      <div class="modal-body">
+      <div class="container">
+      	<form class="form-horizontal" id="new-phone" role="form" th:action="@{/phone/update}" method="post" th:object="${newPhone}">
+      	<fieldset>
+        		<div class="form-group">
+          		<label class="col-xs-3 control-label" for="lastname">Last Name</label>
+          		<div class="col-xs-5">
+        		<input id="lastname" th:field="${newPhone.lastname}"/>
+        		</div>
+        		</div>
+        		<div class="form-group">
+          		<label class="col-xs-3 control-label" for="firstname">First Name</label>
+				<div class="col-xs-5">
+				<input id="firstname" th:field="${newPhone.firstname}"/>
+				</div>
+				</div>
+				<div class="form-group">
+          		<label class="col-xs-3 control-label" for="patronymic">Patronymic</label>
+				<div class="col-xs-5">
+				<input id="patronymic" th:field="${newPhone.patronymic}"/>
+				</div>
+				</div>
+				<div class="form-group">
+          		<label class="col-xs-3 control-label" for="mobilephone">Mobilephone</label>
+				<div class="col-xs-5">
+				<input id="mobilephone" th:field="${newPhone.mobilephone}"/>
+				</div>
+				</div>
+				<div class="form-group">
+          		<label class="col-xs-3 control-label" for="homephone">Homephone</label>
+          		<div class="col-xs-5">
+				<input id="homephone" th:field="${newPhone.homephone}"/>
+				</div>
+				</div>
+				<div class="form-group">
+          		<label class="col-xs-3 control-label" for="address">Address</label>
+          		<div class="col-xs-5">
+				<input id="address" th:field="${newPhone.address}"/>
+				</div>
+				</div>
+				<div class="form-group">
+          		<label class="col-xs-3 control-label" for="email">e-mail</label>
+          		<div class="col-xs-5">
+				<input id="email" th:field="${newPhone.email}"/>
+				</div>
+				</div>
+				</fieldset>
+		</form>
+		</div>
+      </div>
+      <div class="modal-footer">
+      	<button type="submit" form="new-phone" class="btn btn-default">Save</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+<script>
+
+
+$('#myModal').on('show.bs.modal', function(e) {
+
+    var $modal = $(this),
+        id = e.relatedTarget.id;
+    $.ajax({
+        url: '/phone/find?id=' + id,
+        method: 'GET'
+    }).success(function(response) {
+    	var phone =JSON.parse(response);
+        // Populate the form fields with the data returned from server
+        $modal.find('#lastname').val(phone.lastname);
+    	$modal.find('#firstname').val(phone.firstname);
+    	$modal.find('#patronymic').val(phone.patronymic);
+     	$modal.find('#mobilephone').val(phone.mobilephone);
+     	$modal.find('#homephone').val(phone.homephone);
+     	$modal.find('#address').val(phone.address);
+     	$modal.find('#email').val(phone.email);
+    });
+});
+
+</script>
+</body>
+</html>

@@ -12,16 +12,20 @@
 		<div class="card card-container">
 			<form class="form-signin" name="login" th:action="@{/login}" method="post">
 				<legend class="form-signin-heading">Please Login</legend>
-				<label for="username" class="sr-only">Username</label> 
+
+				<label for="username">Username</label> 
 				<input type="text" id="username" name="username" class="form-control" />
-				<label for="password" class="sr-only">Password</label> 
+				<label for="password">Password</label> 
 				<input type="password" id="password" name="password" class="form-control" />
 				<div th:if="${param.error}" class="alert alert-error">Invalid username and password.</div>
 				<div th:if="${param.logout}" class="alert alert-success">You have been logged out.</div>
 				<button type="submit" class="btn btn-lg btn-primary btn-block">Log in</button>
 				<a href="/registration" class="btn btn-lg btn-primary btn-block">Registration</a>
+
+
 			</form>
 		</div>
 	</div>
+
 </body>
 </html>

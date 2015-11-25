@@ -3,36 +3,43 @@
 	xmlns:th="http://www.thymeleaf.org">
 <head lang="en">
 <meta charset="UTF-8" />
+<script src="webjars/jquery/2.1.4/jquery.min.js" type="text/javascript"></script>
+<link href="webjars/bootstrap/3.3.5/css/bootstrap.min.css"
+	rel="stylesheet" media="screen" />
+<link href="css/singin.css" rel="stylesheet" media="screen" />
 <title>Registration</title>
 </head>
 <body>
-	<form id="new-user" role="form" th:action="@{user/save}" method="post"
-		th:object="${user}">
-		<fieldset>
-			<legend>Please enter</legend>
-			<div th:if="${param.error}" class="alert alert-error">Invalid
-				username and password.</div>
-			<div th:if="${param.logout}" class="alert alert-success">You
-				have been logged out.</div>
-			<div>
-				<label for="field1">Login:</label> <input type="text" id="field1"
-					name="field1" th:field="${user.login}" />
-			</div>
-			<div>
-				<label for="field2">Password:</label> <input type="password"
-					id="field2" name="field2" th:field="${user.password}" />
-			</div>
-			<div>
-				<label for="field2">Re-Password:</label> <input type="password" />
-			</div>
-			<div>
-				<label for="field3">Full Name</label> <input type="text" id="field3"
-					name="field3" th:field="${user.fullname}" />
-			</div>
-			<div>
-				<button type="submit">Registration</button>
-			</div>
-		</fieldset>
-	</form>
+	<div class="container">
+		<div class="card card-container">
+			<form class="form-signin" id="new-user" role="form"
+				th:action="@{user/save}" method="post" th:object="${user}">
+				<p class="form-signin-heading">Please enter</p>
+
+				<div>
+					<label for="field1">Login:</label> <input  class="form-control" type="text" id="field1"
+						name="field1" th:field="${user.login}" />
+				</div>
+				<div>
+					<label for="field2">Password:</label> <input  class="form-control" type="password"
+						id="field2" name="field2" th:field="${user.password}" />
+				</div>
+				<div>
+					<label for="field2">Re-Password:</label> <input  class="form-control" type="password" />
+				</div>
+				<div>
+					<label for="field3">Full Name</label> <input  class="form-control" type="text"
+						id="field3" name="field3" th:field="${user.fullname}" />
+				</div>
+				<div th:if="${param.error}" class="alert alert-error">Invalid
+					username and password.</div>
+				<div th:if="${param.logout}" class="alert alert-success">You
+					have been logged out.</div>
+				<div>
+					<button class="btn btn-lg btn-primary btn-block" type="submit">Registration</button>
+				</div>
+			</form>
+		</div>
+	</div>
 </body>
 </html>

@@ -40,7 +40,6 @@ public class DBAuthenticationProvider extends CustomAuthenticationProvider {
         	return null;
         
        if(user.getPassword().equals(DigestUtils.md5DigestAsHex(password.getBytes()))){
-   //     if(user.getPassword().equals(password)){
             List<GrantedAuthority> grantedAuths = new ArrayList<>();
             grantedAuths.add(new SimpleGrantedAuthority("ROLE_USER"));
             Authentication auth = new UsernamePasswordAuthenticationToken(login, password, grantedAuths);

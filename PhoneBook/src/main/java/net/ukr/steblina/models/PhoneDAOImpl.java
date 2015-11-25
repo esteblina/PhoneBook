@@ -50,7 +50,7 @@ public class PhoneDAOImpl implements PhoneDAO {
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Phone> getAllByUser(User user) {
-		return getSession().createQuery("from Phone where id_user="+user.getId()).list();
+		return getSession().createQuery("from Phone where user_id="+user.getId()).list();
 	}
 
 }

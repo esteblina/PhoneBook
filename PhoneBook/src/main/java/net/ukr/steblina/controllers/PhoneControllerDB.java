@@ -1,13 +1,20 @@
 package net.ukr.steblina.controllers;
 
 
+import java.security.Principal;
 import java.util.List;
+
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Profile;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 
 import net.ukr.steblina.models.Phone;
 import net.ukr.steblina.models.PhoneDAO;
@@ -23,8 +30,10 @@ public class PhoneControllerDB {
 	
 	@Autowired
 	private UserDAO userDAO;
+	
 
-	@RequestMapping(value = "/save")
+
+/*	@RequestMapping(value = "/save")
 	@ResponseBody
 	public String create(String login, String lastname, String firstname,
 						 String patronymic, String mobilephone, String homephone,
@@ -47,6 +56,25 @@ public class PhoneControllerDB {
 			return ex.getMessage();
 		}
 		return "Phone succesfully saved!";
+	}*/
+	@RequestMapping(value = "/save")
+	public String create(Phone phone) {
+		try {
+			phoneDAO.save(phone);
+		} catch (Exception ex) {
+			return ex.getMessage();
+		}
+		return "index";
+	}
+	@RequestMapping(value = "/update")
+	public String update(Phone phone, Principal principal) {
+		try {
+			phone.setUser_id(userDAO.getByLogin(principal.getName()).getId());
+			phoneDAO.update(phone);
+		} catch (Exception ex) {
+			return ex.getMessage();
+		}
+		return "index";
 	}
 
 	@RequestMapping(value = "/delete")
@@ -61,7 +89,7 @@ public class PhoneControllerDB {
 		return "The phone " + id +" deleted.";
 	}
 	
-	@RequestMapping(value = "/update")
+/*	@RequestMapping(value = "/update")
 	@ResponseBody
 	public String update(String id, String lastname, String firstname,
 			 String patronymic, String mobilephone, String homephone,
@@ -83,20 +111,18 @@ public class PhoneControllerDB {
 			return ex.getMessage();
 		}
 		return "The phone updated.";
-	}
+	}*/
 
-	@RequestMapping(value = "/userphones")
+	@RequestMapping(value = "/find")
 	@ResponseBody
-	public String getPhones(String login) {
-		String phonesList = "";
+	public String getPhone(Integer id) {
+		Phone phone = null;
+		Gson gson =new Gson();
 		try {
-			User user =userDAO.getByLogin(login);
-			List<Phone> phones = phoneDAO.getAllByUser(user);
-			for (Phone phone : phones)
-				phonesList += phone;
+			phone = phoneDAO.getById(id);
 		} catch (Exception ex) {
-			return "Phones not found";
+			return null;
 		}
-		return phonesList;
+		return gson.toJson(phone);
 	}
 }

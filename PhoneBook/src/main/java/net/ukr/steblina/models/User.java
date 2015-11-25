@@ -33,7 +33,8 @@ public class User{
 	@Column(name="fullname")
 	@Size(min=5, max=50)
 	private String fullname;
-
+	
+	
 	public Integer getId() {
 		return id;
 	}

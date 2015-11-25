@@ -10,6 +10,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 
 import net.ukr.steblina.security.CustomAuthenticationProvider;
+import net.ukr.steblina.security.MyUrlAuthenticationSuccessHandler;
 
 @Configuration
 @EnableWebSecurity
@@ -18,6 +19,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Autowired
 	private CustomAuthenticationProvider authenticationProvider;
+	@Autowired
+	private MyUrlAuthenticationSuccessHandler successHandler;
 
 	@Override
 	public void configure(WebSecurity web) throws Exception {
@@ -26,7 +29,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.formLogin().loginPage("/login").and().logout().and().authorizeRequests()
+		http.formLogin().loginPage("/login").successHandler(successHandler).and().logout().and().authorizeRequests()
 				.antMatchers("/login","/user/save","/registration", "/logout", "/webjars/**").permitAll()
 				.anyRequest().authenticated().and().csrf().disable();
 	}
