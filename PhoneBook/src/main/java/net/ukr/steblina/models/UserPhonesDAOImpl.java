@@ -52,7 +52,65 @@ public class UserPhonesDAOImpl implements UserPhonesDAO {
 		}
 
 	}
-	
+	@Override
+	public void savePhone(Phone phone, User user, File file) {
+
+		List<UserPhones> userPhonesList = getSavedData(file);
+		UserPhones userPhone=null;
+			for(UserPhones userPhones:userPhonesList){
+				if(user.getLogin().equals(userPhones.getUser().getLogin())){
+					userPhone=userPhones;
+					break;
+				}
+			}
+		
+		List<Phone> phones =userPhone.getPhones();
+		if(phones.size()==0)
+			phone.setId(0);
+		else
+			phone.setId(phones.size());
+		userPhone.addPhone(phone);
+		
+		save(userPhone, file);
+
+	}
+	@Override
+	public void updatePhone(Phone newPhone, User user, File file) {
+		List<UserPhones> userPhonesList = getSavedData(file);
+		UserPhones userPhone=null;
+			for(UserPhones userPhones:userPhonesList){
+				if(user.getLogin().equals(userPhones.getUser().getLogin())){
+					userPhone=userPhones;
+					break;
+				}
+			}
+		
+
+		userPhone.updatePhone(newPhone);
+		
+		save(userPhone, file);
+	}
+	@Override
+	public void deletePhone(Integer id, User user, File file) {
+		List<UserPhones> userPhonesList = getSavedData(file);
+		UserPhones userPhone=null;
+			for(UserPhones userPhones:userPhonesList){
+				if(user.getLogin().equals(userPhones.getUser().getLogin())){
+					userPhone=userPhones;
+					break;
+				}
+			}
+			Phone toDell=null;
+		for(Phone p:userPhone.getPhones())
+			if(p.getId()==id)
+				toDell=p;
+		
+
+		userPhone.deletePhone(toDell);
+		
+		save(userPhone, file);
+		
+	}
 	@Override
 	public User getById(Integer id, File file) throws Exception {
 		List<UserPhones> userPhonesList = getSavedData(file);
@@ -114,6 +172,7 @@ public class UserPhonesDAOImpl implements UserPhonesDAO {
 		List<UserPhones> userPhonesList = getSavedData(file);
 		for(UserPhones userPhones: userPhonesList){
 			if(userPhones.getUser().equals(userPhone.getUser())){
+				
 				userPhonesList.remove(userPhones);
 				userPhonesList.add(userPhone);
 				break;
@@ -160,6 +219,8 @@ public class UserPhonesDAOImpl implements UserPhonesDAO {
 			data=new LinkedList<UserPhones>();
 		return data;
 	}
+
+
 
 
 

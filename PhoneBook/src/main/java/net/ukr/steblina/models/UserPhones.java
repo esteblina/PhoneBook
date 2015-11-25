@@ -1,6 +1,7 @@
 package net.ukr.steblina.models;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 public class UserPhones {
@@ -16,6 +17,8 @@ public class UserPhones {
 	}
 	
 	public List<Phone> getPhones() {
+		if(phones==null)
+			return new LinkedList<Phone>();
 		return phones;
 	}
 	public void setPhones(List<Phone> phones) {

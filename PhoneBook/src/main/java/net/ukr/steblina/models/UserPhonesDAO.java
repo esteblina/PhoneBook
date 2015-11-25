@@ -17,4 +17,10 @@ public interface UserPhonesDAO {
 
 	public UserPhones getByUser(User user, File file) throws Exception;
 
+	void savePhone(Phone phone, User user, File file);
+
+	public void updatePhone(Phone newPhone, User user, File file);
+
+	public void deletePhone(Integer id, User user, File file);
+
 }

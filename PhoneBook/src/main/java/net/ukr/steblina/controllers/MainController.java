@@ -18,8 +18,7 @@ public class MainController {
 	
 	@RequestMapping(value = "/")
 	public String index(Principal principal) {
-		System.out.println(principal.getName());
-		return "index";
+			return "redirect:/user/"+principal.getName();
 	}
 	
 	@RequestMapping(value = "/login")

@@ -15,7 +15,7 @@ public class Phone {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;
 
-	@NotNull
+
 	@Column(name = "user_id")
 	private Integer user_id;
 
@@ -143,6 +143,7 @@ public class Phone {
 	}
 
 	public void setEmail(String email) {
+		if(!email.equals(""))
 		if(!Validation.emailValid(email))
 			throw new ValidationException("Email invalid");
 		this.email = email;
