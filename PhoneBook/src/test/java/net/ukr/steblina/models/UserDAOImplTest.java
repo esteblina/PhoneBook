@@ -3,20 +3,16 @@ package net.ukr.steblina.models;
 
 import java.sql.SQLWarning;
 
-
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Profile;
-import org.springframework.test.context.ActiveProfiles;
 import org.springframework.transaction.annotation.Transactional;
 
 import net.ukr.steblina.AbstractPhoneBookApplicationTests;
 
 @Transactional
-@Profile("file")
 public class UserDAOImplTest extends AbstractPhoneBookApplicationTests {
 	
 	@Autowired
@@ -27,6 +23,7 @@ public class UserDAOImplTest extends AbstractPhoneBookApplicationTests {
 	
 	@Before
 	public void setUp() throws Exception {
+		super.setUp();
 		user1=new User();
 		user1.setLogin("login");
 		user1.setPassword("Pass1");

@@ -36,11 +36,6 @@ public class PhoneDAOImpl implements PhoneDAO {
 		getSession().update(phone);
 	}
 
-/*	@SuppressWarnings("unchecked")
-	@Override
-	public List<Phone> getAll() {
-		return getSession().createQuery("from Phone").list();
-	}*/
 
 	@Override
 	public Phone getById(Integer id) {

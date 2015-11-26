@@ -1,7 +1,6 @@
 package net.ukr.steblina.models;
 
 import java.sql.SQLWarning;
-import java.util.List;
 
 import org.hibernate.Criteria;
 import org.hibernate.Session;
@@ -29,27 +28,6 @@ public class UserDAOImpl implements UserDAO{
 	public void save(User user) {
 		getSession().save(user);
 	}
-/*
-	@Override
-	public void delete(User user) {
-		getSession().delete(user);
-	}*/
-
-/*	@Override
-	@SuppressWarnings("unchecked")
-	public List<User> getAll() {
-		return getSession().createQuery("from User").list();
-	}*/
-
-/*	@Override
-	public User getById(Integer id) {
-		return (User) getSession().get(User.class, id);
-	}*/
-/*
-	@Override
-	public void update(User user) {
-		getSession().update(user);
-	}*/
 
 	@Override
 	public User getByLogin(String login) throws SQLWarning {

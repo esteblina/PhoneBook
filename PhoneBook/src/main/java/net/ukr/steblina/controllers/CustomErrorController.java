@@ -7,7 +7,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.web.ErrorAttributes;
 import org.springframework.boot.autoconfigure.web.ErrorController;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,14 +26,11 @@ public class CustomErrorController implements ErrorController {
 
     @RequestMapping(value = PATH)
     ErrorJson error(HttpServletRequest request, HttpServletResponse response) {
-        // Appropriate HTTP response code (e.g. 404 or 500) is automatically set by Spring. 
-        // Here we just define response body.
     	if(response.getStatus()==404)
 			try {
 				response.sendRedirect("/");
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				System.err.print(e);
 			}
         return new ErrorJson(response.getStatus(), getErrorAttributes(request, false));
     }

@@ -111,40 +111,6 @@ public class UserPhonesDAOImpl implements UserPhonesDAO {
 		save(userPhone, file);
 		
 	}
-/*	@Override
-	public User getById(Integer id, File file) throws Exception {
-		List<UserPhones> userPhonesList = getSavedData(file);
-		User user=null;
-		int size = userPhonesList.size();
-		if(size==0)
-			throw new Exception("No users");
-		else{
-			for(UserPhones userPhones:userPhonesList){
-				User tmpUser =userPhones.getUser();
-				if(tmpUser.getId()==id)
-					user=tmpUser;
-			}
-		}
-		if(user==null)
-			throw new Exception("No user");
-		
-		return user;
-	}*/
-	
-
-/*	@Override
-	public List<User> getAllUsers(File file) throws Exception {
-		List<User> users=new ArrayList<User>();
-		List<UserPhones> userPhonesList = getSavedData(file);
-		if(userPhonesList.size()==0)
-			throw new Exception("No users");
-		
-		for(UserPhones userPhones:userPhonesList){
-			users.add(userPhones.getUser());
-			
-		}
-		return users;
-	}*/
 
 	@Override
 	public User getByLogin(String login, File file) throws Exception {
@@ -219,10 +185,5 @@ public class UserPhonesDAOImpl implements UserPhonesDAO {
 			data=new LinkedList<UserPhones>();
 		return data;
 	}
-
-
-
-
-
 
 }

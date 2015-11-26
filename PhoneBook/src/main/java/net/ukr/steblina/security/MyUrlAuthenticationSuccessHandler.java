@@ -14,8 +14,6 @@ import org.springframework.security.web.WebAttributes;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.stereotype.Service;
 
-import net.ukr.steblina.models.User;
-
 @Service
 public class MyUrlAuthenticationSuccessHandler implements AuthenticationSuccessHandler {
 
