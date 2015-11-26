@@ -8,18 +8,21 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.annotation.IfProfileValue;
 import org.springframework.transaction.annotation.Transactional;
 
 import net.ukr.steblina.AbstractPhoneBookApplicationTests;
 
+
 @Transactional
+@IfProfileValue(name="profile",value="db")
 public class UserDAOImplTest extends AbstractPhoneBookApplicationTests {
+	
 	
 	@Autowired
 	private UserDAO userDAO;
 
 	private User user1;
-	
 	
 	@Before
 	public void setUp() throws Exception {
@@ -33,7 +36,6 @@ public class UserDAOImplTest extends AbstractPhoneBookApplicationTests {
 	@After
 	public void tearDown() throws Exception {
 	}
-
 	@Test
 	public void testSave() throws SQLWarning {
 		userDAO.save(user1);
@@ -42,7 +44,6 @@ public class UserDAOImplTest extends AbstractPhoneBookApplicationTests {
 		Assert.assertNotNull("Saved user", saved);
 		Assert.assertEquals("Login", user1.getLogin(), saved.getLogin());
 	}
-
 	@Test
 	public void testGetByLogin() throws SQLWarning {
 		userDAO.save(user1);

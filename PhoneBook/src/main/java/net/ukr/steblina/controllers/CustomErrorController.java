@@ -32,7 +32,7 @@ public class CustomErrorController implements ErrorController {
 			} catch (IOException e) {
 				System.err.print(e);
 			}
-        return new ErrorJson(response.getStatus(), getErrorAttributes(request, false));
+        return new ErrorJson(response.getStatus(), getErrorAttributes(request, true));
     }
 
     @Override

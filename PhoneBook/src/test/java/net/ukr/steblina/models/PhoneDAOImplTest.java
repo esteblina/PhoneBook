@@ -6,11 +6,15 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.Assert;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.annotation.IfProfileValue;
 import org.springframework.transaction.annotation.Transactional;
 
 import net.ukr.steblina.AbstractPhoneBookApplicationTests;
 
+
+
 @Transactional
+@IfProfileValue(name="profile",value="db")
 public class PhoneDAOImplTest extends AbstractPhoneBookApplicationTests {
 	
 	@Autowired

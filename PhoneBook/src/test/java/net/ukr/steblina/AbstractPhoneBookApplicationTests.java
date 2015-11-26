@@ -3,6 +3,7 @@ package net.ukr.steblina;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.SpringApplicationConfiguration;
+import org.springframework.test.annotation.ProfileValueSourceConfiguration;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
@@ -16,15 +17,18 @@ import net.ukr.steblina.controllers.BasicController;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = PhoneBookApplication.class)
-@TestPropertySource(properties = "lardi.conf=c:/eclipse/application.properties")
+@TestPropertySource(properties = "lardi.conf=E:/hellish/wp/application.properties")
+@ProfileValueSourceConfiguration(CustomProfileSource.class)
 @WebAppConfiguration
 public abstract class AbstractPhoneBookApplicationTests {
 	protected MockMvc mvc;
+
 
     @Autowired
     protected WebApplicationContext webApplicationContext;
 
     protected void setUp() throws Exception {
+    	
         mvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
     }
 
