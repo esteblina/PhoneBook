@@ -10,7 +10,7 @@ firstname VARCHAR(50) NOT NULL DEFAULT '0', patronymic VARCHAR(50) NOT NULL DEFA
 address VARCHAR(50) DEFAULT '0',email VARCHAR(50) DEFAULT '0', PRIMARY KEY (id))
 
 ####Properties file sample:
-\####Select type of data storage "db" or "file" <br>
+\####Select type of data storage `db` or `file` <br>
 spring.profiles.active=db<br>
 \####File property<br>
 file.path=C:/wp/test.json<br>
