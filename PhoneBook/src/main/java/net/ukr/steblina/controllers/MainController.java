@@ -13,7 +13,7 @@ import net.ukr.steblina.models.User;
 
 
 @Controller
-public class MainController {
+public class MainController implements BasicController {
 
 	
 	@RequestMapping(value = "/")

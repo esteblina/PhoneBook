@@ -6,7 +6,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Writer;
 import java.lang.reflect.Type;
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -112,7 +111,7 @@ public class UserPhonesDAOImpl implements UserPhonesDAO {
 		save(userPhone, file);
 		
 	}
-	@Override
+/*	@Override
 	public User getById(Integer id, File file) throws Exception {
 		List<UserPhones> userPhonesList = getSavedData(file);
 		User user=null;
@@ -130,10 +129,10 @@ public class UserPhonesDAOImpl implements UserPhonesDAO {
 			throw new Exception("No user");
 		
 		return user;
-	}
+	}*/
 	
 
-	@Override
+/*	@Override
 	public List<User> getAllUsers(File file) throws Exception {
 		List<User> users=new ArrayList<User>();
 		List<UserPhones> userPhonesList = getSavedData(file);
@@ -145,7 +144,7 @@ public class UserPhonesDAOImpl implements UserPhonesDAO {
 			
 		}
 		return users;
-	}
+	}*/
 
 	@Override
 	public User getByLogin(String login, File file) throws Exception {

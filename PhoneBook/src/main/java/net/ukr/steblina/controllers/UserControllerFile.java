@@ -23,7 +23,7 @@ import net.ukr.steblina.models.UserPhonesDAOImpl;
 @Controller
 @Profile("file")
 @RequestMapping(value = "/user")
-public class UserControllerFile {
+public class UserControllerFile implements BasicController  {
 
 	@Autowired
 	private File file;
@@ -66,8 +66,7 @@ public class UserControllerFile {
 			return "redirect:/user/"+principal.getName();
 		if(login==null||login.equals(""))
 			return "redirect:/user/"+principal.getName();
-	//	List<Phone> pl=phoneDAO.getAllByUser(userDAO.getByLogin(login));
-	//	userPhonesDAO.getByUser(userPhonesDAO.getByLogin(login, file),file).getPhones();
+
 		model.addAttribute("userName",principal.getName());
 		model.addAttribute("phones", userPhonesDAO.getByUser(userPhonesDAO.getByLogin(login, file),file).getPhones());
 		model.addAttribute("newPhone", new Phone());
@@ -75,7 +74,7 @@ public class UserControllerFile {
 	}
 
 	@RequestMapping(value = "/")
-	public String no(Principal principal){
+	public String redirect(Principal principal){
 
 			return "redirect:/user/"+principal.getName();
 

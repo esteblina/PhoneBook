@@ -22,7 +22,7 @@ import net.ukr.steblina.models.UserDAO;
 @Controller
 @Profile("db")
 @RequestMapping(value = "/phone")
-public class PhoneControllerDB {
+public class PhoneControllerDB implements BasicController  {
 	@Autowired
 	private PhoneDAO phoneDAO;
 	

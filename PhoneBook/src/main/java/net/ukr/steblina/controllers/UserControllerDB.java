@@ -22,7 +22,7 @@ import net.ukr.steblina.models.UserDAO;
 @Controller
 @Profile("db")
 @RequestMapping(value = "/user")
-public class UserControllerDB {
+public class UserControllerDB implements BasicController  {
 
 	
 
@@ -59,7 +59,7 @@ public class UserControllerDB {
 	}
 
 	@RequestMapping(value = "/")
-	public String no(Principal principal){
+	public String redirect(Principal principal){
 
 			return "redirect:/user/"+principal.getName();
 

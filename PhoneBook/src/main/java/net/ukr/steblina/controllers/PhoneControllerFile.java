@@ -25,7 +25,7 @@ import net.ukr.steblina.models.UserPhonesDAOImpl;
 @Controller
 @Profile("file")
 @RequestMapping(value = "/phone")
-public class PhoneControllerFile {
+public class PhoneControllerFile implements BasicController  {
 	@Autowired
 	private File file;
 	@Autowired

@@ -18,49 +18,47 @@ import net.ukr.steblina.models.User;
 
 @Service
 public class MyUrlAuthenticationSuccessHandler implements AuthenticationSuccessHandler {
-	
-	
-	
+
 	private RedirectStrategy redirectStrategy = new DefaultRedirectStrategy();
-	
-	
+
 	@Override
-	public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication)
-			throws IOException, ServletException {
-		  handle(request, response, authentication);
-	        clearAuthenticationAttributes(request);
+	public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
+			Authentication authentication) throws IOException, ServletException {
+		handle(request, response, authentication);
+		clearAuthenticationAttributes(request);
 
 	}
-	 protected void handle(HttpServletRequest request, 
-		      HttpServletResponse response, Authentication authentication) throws IOException {
-		        String targetUrl = determineTargetUrl(authentication);
-		 
-		        if (response.isCommitted()) {
-		            return;
-		        }
-		 
-		        redirectStrategy.sendRedirect(request, response, targetUrl);
-		    }
-		 
-		    /** Builds the target URL according to the logic defined in the main class Javadoc. */
-		    protected String determineTargetUrl(Authentication authentication) {
-		        
-		            return "/user/"+authentication.getName();
-		       
-		    }
-		 
-		    protected void clearAuthenticationAttributes(HttpServletRequest request) {
-		        HttpSession session = request.getSession(false);
-		        if (session == null) {
-		            return;
-		        }
-		        session.removeAttribute(WebAttributes.AUTHENTICATION_EXCEPTION);
-		    }
-		 
-		    public void setRedirectStrategy(RedirectStrategy redirectStrategy) {
-		        this.redirectStrategy = redirectStrategy;
-		    }
-		    protected RedirectStrategy getRedirectStrategy() {
-		        return redirectStrategy;
-		    }
+
+	protected void handle(HttpServletRequest request, HttpServletResponse response, Authentication authentication)
+			throws IOException {
+		String targetUrl = determineTargetUrl(authentication);
+
+		if (response.isCommitted()) {
+			return;
+		}
+
+		redirectStrategy.sendRedirect(request, response, targetUrl);
+	}
+
+	protected String determineTargetUrl(Authentication authentication) {
+
+		return "/user/" + authentication.getName();
+
+	}
+
+	protected void clearAuthenticationAttributes(HttpServletRequest request) {
+		HttpSession session = request.getSession(false);
+		if (session == null) {
+			return;
+		}
+		session.removeAttribute(WebAttributes.AUTHENTICATION_EXCEPTION);
+	}
+
+	public void setRedirectStrategy(RedirectStrategy redirectStrategy) {
+		this.redirectStrategy = redirectStrategy;
+	}
+
+	protected RedirectStrategy getRedirectStrategy() {
+		return redirectStrategy;
+	}
 }
